@@ -9,20 +9,12 @@ const openai = new OpenAIApi(configuration)
 
 const chatbotConversation = document.getElementById('chatbot-conversation')
  
-const conversationArr = [
-    {
-        role: 'system',
-        content: 'You are a highly knowledgeable assistant that keeps its answers short.'
-    }
-] 
+let conversationStr = ''
  
 document.addEventListener('submit', (e) => {
     e.preventDefault()
     const userInput = document.getElementById('user-input')   
-    conversationArr.push({ 
-        role: 'user',
-        content: userInput.value
-    }) 
+    conversationStr += ` ${userInput.value} ->`
     fetchReply()
     const newSpeechBubble = document.createElement('div')
     newSpeechBubble.classList.add('speech', 'speech-human')
@@ -33,14 +25,18 @@ document.addEventListener('submit', (e) => {
 }) 
 
 async function fetchReply(){
-    const response = await openai.createChatCompletion({
-        model: 'gpt-4',
-        messages: conversationArr,
+    const response = await openai.createCompletion({
+        model: 'davinci:ft-personal-2023-07-21-10-27-32',
+        prompt: conversationStr,
         presence_penalty: 0,
-        frequency_penalty: 0.3
-    }) 
-    conversationArr.push(response.data.choices[0].message)
-    renderTypewriterText(response.data.choices[0].message.content)
+        frequency_penalty: 0.3,
+        max_tokens: 100,
+        temperature: 0,
+        stop: ['\n', '->']
+    })
+    conversationStr += ` ${response.data.choices[0].text} \n`
+    renderTypewriterText(response.data.choices[0].text)
+    console.log(conversationStr)
 }
 
 function renderTypewriterText(text) {
