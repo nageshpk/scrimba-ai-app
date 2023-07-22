@@ -36,7 +36,6 @@ async function fetchReply(){
     })
     conversationStr += ` ${response.data.choices[0].text} \n`
     renderTypewriterText(response.data.choices[0].text)
-    console.log(conversationStr)
 }
 
 function renderTypewriterText(text) {
