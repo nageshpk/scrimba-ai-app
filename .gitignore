@@ -4,3 +4,5 @@ package.json
 package-lock.json
 .csv
 /data
+# Local Netlify folder
+.netlify
