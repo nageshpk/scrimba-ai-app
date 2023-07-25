@@ -18,7 +18,6 @@ const handler = async (event) => {
         temperature: 0,
         stop: ['\n', '->']
     })
-    const subject = event.queryStringParameters.name || 'World'
     return {
       statusCode: 200,
       body: JSON.stringify({ 
