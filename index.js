@@ -35,7 +35,7 @@ async function fetchReply(){
         body: conversationStr
     })
     const data = await response.json()
-    
+    console.log(data)
     
     // const response = await openai.createCompletion({
     //     model: 'davinci:ft-personal-2023-07-21-10-27-32',
@@ -47,8 +47,8 @@ async function fetchReply(){
     //     stop: ['\n', '->']
     // })
 
-    conversationStr += ` ${response.data.choices[0].text} \n`
-    renderTypewriterText(response.data.choices[0].text)
+    // conversationStr += ` ${response.data.choices[0].text} \n`
+    // renderTypewriterText(response.data.choices[0].text)
 }
 
 function renderTypewriterText(text) {
