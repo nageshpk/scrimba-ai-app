@@ -47,8 +47,9 @@ async function fetchReply(){
     //     stop: ['\n', '->']
     // })
 
-    // conversationStr += ` ${response.data.choices[0].text} \n`
-    // renderTypewriterText(response.data.choices[0].text)
+    conversationStr += ` ${data.reply.choices[0].text} ->`
+    renderTypewriterText(data.reply.choices[0].text)
+    console.log(data)
 }
 
 function renderTypewriterText(text) {
