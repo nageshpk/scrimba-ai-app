@@ -1,14 +1,4 @@
-// import { Configuration, OpenAIApi } from 'openai'
-// import { process } from './env'
-
-// const configuration = new Configuration({
-//     apiKey: process.env.OPENAI_API_KEY,
-// })
-
-// const openai = new OpenAIApi(configuration)
-
 const chatbotConversation = document.getElementById('chatbot-conversation')
- 
 let conversationStr = ''
  
 document.addEventListener('submit', (e) => {
@@ -26,7 +16,6 @@ document.addEventListener('submit', (e) => {
 
 async function fetchReply(){
     const url = 'https://cerulean-granita-ce89b3.netlify.app/.netlify/functions/fetchAI'
-    
     const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -35,21 +24,8 @@ async function fetchReply(){
         body: conversationStr
     })
     const data = await response.json()
-    console.log(data)
-    
-    // const response = await openai.createCompletion({
-    //     model: 'davinci:ft-personal-2023-07-21-10-27-32',
-    //     prompt: conversationStr,
-    //     presence_penalty: 0,
-    //     frequency_penalty: 0.3,
-    //     max_tokens: 100,
-    //     temperature: 0,
-    //     stop: ['\n', '->']
-    // })
-
     conversationStr += ` ${data.reply.choices[0].text} ->`
     renderTypewriterText(data.reply.choices[0].text)
-    console.log(data)
 }
 
 function renderTypewriterText(text) {
