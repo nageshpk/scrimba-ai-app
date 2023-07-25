@@ -17,7 +17,7 @@ document.addEventListener('submit', (e) => {
 async function fetchReply(){
     const url = 'https://cerulean-granita-ce89b3.netlify.app/.netlify/functions/fetchAI'
     const response = await fetch(url, {
-        method: "POST",
+        method: 'POST',
         headers: {
             'content-type': 'text/plain' 
         },
